@@ -1,0 +1,39 @@
+replicaCount: 3
+
+image:
+  repository: ghcr.io/ldest/sre-course/api
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "100m"
+  limits:
+    memory: "128Mi"
+    cpu: "200m"
+
+podEnv:
+  - name: CONNECTIONSTRINGS__PGCONNECTION
+    value: Host=91.185.86.86;Port=5000;Database=postgres;Username=postgres;Password=postgres-pass
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: weather-api-94
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: weather-api
+              port:
+                number: 80
