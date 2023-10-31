@@ -6,7 +6,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "f0135e1"
 
-
 service:
   type: ClusterIP
   port: 80
@@ -21,7 +20,7 @@ resources:
 
 podEnv:
   - name: CONNECTIONSTRINGS__PGCONNECTION
-    value: Host=91.185.86.86;Port=5000;Database=postgres;Username=postgres;Password=postgres-pass
+    value: Host=91.185.85.46;Port=5000;Database=postgres;Username=postgres;Password=postgres-pass
 
 ingress:
   enabled: true
